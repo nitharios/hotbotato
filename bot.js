@@ -41,10 +41,9 @@ const bot = () => {
       if (command.args && !args.length) {
         return reply.send(`You didn't provide any arguments, ${message.author}`);
       
-      } else {
-        console.log(message.channel.members);
-        
+      } else {        
         return command.execute(message, args);
+      
       }
 
     } else {
