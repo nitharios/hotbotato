@@ -33,10 +33,20 @@ const bot = () => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
+    const commandName = args.shift().toLowerCase();
+    const command = client.commands.get(commandName);
+    const reply = message.channel;
 
-    if (client.commands.get(command)) {
-      return client.commands.get(command).execute(message, args);
+    if (client.commands.get(commandName)) {
+      if (command.args && !args.length) {
+        return reply.send(`You didn't provide any arguments, ${message.author}`);
+      
+      } else {
+        console.log(message.channel.members);
+        
+        return command.execute(message, args);
+      }
+
     } else {
       return;
     }
