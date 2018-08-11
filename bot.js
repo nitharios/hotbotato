@@ -1,42 +1,50 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const fs = require('fs');
+
+const commandNames = {
+  IGNITE: 'ignite',
+  PASS: 'pass'
+}
 
 const {
   prefix,
   token
 } = require('./config.json');
 
-client.on('ready', () => {
-  console.log('Ready!');
-});
+const bot = () => {
+  const { IGNITE, PASS } = commandNames;
+  const client = new Discord.Client();
+  client.commands = new Discord.Collection();
 
-client.on('message', (message) => {
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  const commandFiles = fs.readdirSync('./commands').filter((file) => {    
+    return file.endsWith('.js');
+  });  
   
-  const args = message.content.slice(prefix.length).split(/ +/);
-  const command = args.shift().toLowerCase();
+  for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+  }  
+  
+  client.on('ready', () => {
+    console.log('Ready!');
+  });
 
-  // if (message.content.startsWith(`${prefix}ping`)) {
-  //   // message.channel.send('Pong.');
-  //   message.channel.send(`This server's name is: ${message.guild.name}`);
-  // }
+  client.on('message', (message) => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  if (!args.length) {
-    return message.channel.send(`No arguments found. Try again ${message.author}`);
+    const args = message.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    if (client.commands.get(command)) {
+      return client.commands.get(command).execute(message, args);
+    } else {
+      return;
+    }
+  })
+
+  return {
+    client: client
   }
+}
 
-  switch (command) {
-    case 'ignite':
-      return message.channel.send('Command "IGNITE" authorized.');
-    
-    case 'pass':
-      return message.channel.send('Command "PASS" authorized.');
-      
-    default:
-      return message.channel.send('No matching command found!');
-      
-  }
-
-})
-
-client.login(token);
+bot().client.login(token);
