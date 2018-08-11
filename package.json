@@ -1,0 +1,22 @@
+{
+  "name": "hotbotato",
+  "version": "1.0.0",
+  "description": "Like hot potato but for Twitch bots!",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitharios/hotbotato.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nitharios/hotbotato/issues"
+  },
+  "homepage": "https://github.com/nitharios/hotbotato#readme",
+  "dependencies": {
+    "npm": "^6.3.0"
+  }
+}
