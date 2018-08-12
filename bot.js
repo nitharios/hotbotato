@@ -12,8 +12,8 @@ const bot = () => {
   let timerTicking = false;
 
   //GLOABAL VARIABLES
-  var potatoHolder;
-  var startedGame;
+  let potatoHolder;
+  let startedGame;
 
   const commandFiles = fs.readdirSync('./commands').filter((file) => {    
     return file.endsWith('.js');
@@ -42,6 +42,7 @@ const bot = () => {
     
       } else if (commandName === 'ignite' && !timerTicking) {
         botatoTimer(message.channel);
+        setPotatoHolder(message.author);
         return command.execute(message, args);
         
       } else if (commandName !== 'ignite') {
@@ -61,6 +62,10 @@ const bot = () => {
       timerTicking = false;
       channel.send('BOOM!!!');
     }, clock * 1000);
+  }
+
+  setTarget = (user) => {
+    potatoHolder = user;
   }
 
   return {
