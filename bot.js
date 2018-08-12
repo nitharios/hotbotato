@@ -18,8 +18,9 @@ const bot = () => {
   client.commands = new Discord.Collection();
 
   let timerTicking = false;
-  let potatoHolder;
+  let potatoHolder = {};
   let deathTracker = {};
+  let deathTable = 'Death Table\r\n';
 
   const commandFiles = fs.readdirSync('./commands').filter((file) => {    
     return file.endsWith('.js');
@@ -75,7 +76,7 @@ const bot = () => {
       channel.send(generateMessage(5));
       generateGIF(channel);
       const command = client.commands.get('deaths');
-      deathTracker = command.execute(channel, potatoHolder, deathTracker);
+      deathTracker = command.execute(channel, potatoHolder, deathTracker, deathTable);
       potatoHolder = '';
     }, clock * 1000);
   }
