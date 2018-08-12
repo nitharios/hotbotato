@@ -3,7 +3,8 @@ const fs = require('fs');
 
 const commandNames = {
   IGNITE: 'ignite',
-  PASS: 'pass'
+  PASS: 'pass',
+  TRACK: 'track'
 }
 
 const {
@@ -12,9 +13,12 @@ const {
 } = require('./config.json');
 
 const bot = () => {
-  const { IGNITE, PASS } = commandNames;
+  const { IGNITE, PASS, TRACK } = commandNames;
   const client = new Discord.Client();
   client.commands = new Discord.Collection();
+
+  //GLOABAL VARIABLES
+    var potatoHolder;
 
   const commandFiles = fs.readdirSync('./commands').filter((file) => {    
     return file.endsWith('.js');

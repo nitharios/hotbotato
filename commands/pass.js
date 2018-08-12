@@ -8,7 +8,8 @@ module.exports = {
       return member.user.username === args[0];
     });
 
-    if (!target) {
+      if (!target) {
+      console.log("This is being passed in" + args[0]);
       return reply.send(`Oh no, ${ message.author }! That person doesn't exist :(`);
     
     } else if (target.user.username === message.author.username) {
@@ -18,6 +19,7 @@ module.exports = {
       return reply.send(`You can't pass to a bot, ${ message.author }!`);
 
     } else {
+        potatoHolder = target;
       return reply.send(`${ message.author } passes to ${ target }`);
     
     }
