@@ -3,7 +3,15 @@ const fs = require('fs');
 const {
   prefix,
   token
-} = require('./config.json');
+} = require('./config.json')
+
+const links = [
+  'http://api.giphy.com/v1/gifs/search?q=konosuba%20explosion&api_key=RZVJZWX9duzqE8SGkqMVf1EZgndURlxA&limit=1',
+  "http://api.giphy.com/v1/gifs/search?q=explosion&api_key=RZVJZWX9duzqE8SGkqMVf1EZgndURlxA&limit=1",
+  "http://api.giphy.com/v1/gifs/search?q=bird-explosion-parakeet&api_key=RZVJZWX9duzqE8SGkqMVf1EZgndURlxA&limit=1",
+  "http://api.giphy.com/v1/gifs/search?q=explosion-1985-commando&api_key=RZVJZWX9duzqE8SGkqMVf1EZgndURlxA&limit=1",
+  "http://api.giphy.com/v1/gifs/search?q=dog%20explosion%20&api_key=RZVJZWX9duzqE8SGkqMVf1EZgndURlxA&limit=1"
+]
 
 const bot = () => {
   const client = new Discord.Client();
@@ -65,16 +73,10 @@ const bot = () => {
       timerTicking = false;
       // channel.send(`BOOM!!! ${potatoHolder} exploded into smithereens!`)
       channel.send(generateMessage(5));
+      generateGIF(channel);
       const command = client.commands.get('deaths');
       deathTracker = command.execute(channel, potatoHolder, deathTracker);
-
-      let XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-      let xmlHttp = new XMLHttpRequest();
-      xmlHttp.open("GET", "http://api.giphy.com/v1/gifs/search?q=konosuba%20explosion&api_key=RZVJZWX9duzqE8SGkqMVf1EZgndURlxA&limit=1", false); // false for synchronous request
-      xmlHttp.send(null);
-      let response = JSON.parse(xmlHttp.responseText);
-      console.log(response.data[0].url);
-      // return channel.send(response.data[0].url);
+      potatoHolder = '';
     }, clock * 1000);
   }
 
@@ -86,6 +88,18 @@ const bot = () => {
     }
 
     return str;
+  }
+
+  generateGIF = (channel) => {
+    const index = Math.floor(Math.random() * links.length);
+    const url = links[index];
+
+    let XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", url, false); // false for synchronous request
+    xmlHttp.send(null);
+    let response = JSON.parse(xmlHttp.responseText);
+    return channel.send(response.data[0].url);
   }
 
   return {

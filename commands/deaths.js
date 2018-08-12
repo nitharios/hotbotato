@@ -8,8 +8,17 @@ module.exports = {
     
     console.log(currentDeaths);
     
-    channel.send(`\`${JSON.stringify(currentDeaths)}\``);
-    return currentDeaths;
+    const players = Object.keys(currentDeaths);
+    const deaths = Object.values(currentDeaths);
+
+    let deathStr = `Death Table\r\n`;
+
+    for (let i = 0; i < players.length; i++) {
+      deathStr += `${players[i]} : ${deaths[i]}\r\n`
+    }
+
+    channel.send(deathStr);
+    return deathStr;
 
   }
 }

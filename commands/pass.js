@@ -21,9 +21,9 @@ module.exports = {
       reply.send(`You can't pass to a bot, ${message.author}!`);
       return holder;
 
-    // } else if (target.presence.status === 'offline') {
-    //   reply.send(`That person isn't online ${message.author}`);
-    //   return holder;
+    } else if (target.presence.status === 'offline') {
+      reply.send(`That person isn't online ${message.author}`);
+      return holder;
 
     } else {
       reply.send(`${message.author} passes to ${target}`);
