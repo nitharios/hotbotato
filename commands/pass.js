@@ -19,7 +19,8 @@ module.exports = {
       return reply.send(`You can't pass to a bot, ${ message.author }!`);
 
     } else {
-        potatoHolder = target;
+      potatoHolder = target;
+      var timer = setTimeout(function () { reply.send(`${target} owe's Nathan $5`); }, 5000);
       return reply.send(`${ message.author } passes to ${ target }`);
     
     }
