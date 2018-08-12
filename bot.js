@@ -39,7 +39,7 @@ const bot = () => {
 
     if (client.commands.get(commandName)) {
       if (command.args && !args.length) {
-        return reply.send(`You didn't provide any arguments, ${message.author}`);
+        return reply.send(`You didn't provide any arguments, ${ message.author }`);
       
       } else {        
         return command.execute(message, args);
@@ -47,7 +47,7 @@ const bot = () => {
       }
 
     } else {
-      return;
+      return reply.send(`That is not a valid command, ${ message.author }!`);
     }
   })
 
