@@ -8,9 +8,6 @@ module.exports = {
       return member.user.username === args[0];
     });
 
-    console.log(target.presence);    
-    
-
     if (!target) {
       return reply.send(`Oh no, ${message.author}! That person doesn't exist :(`);
     
@@ -24,6 +21,8 @@ module.exports = {
       return reply.send(`That person isn't online ${message.author}`);
 
     } else {
+      potatoHolder = target;
+      var timer = setTimeout(function () { reply.send(`${target} owe's Nathan $5`); }, 5000);
       return reply.send(`${ message.author } passes to ${ target }`);
     
     }

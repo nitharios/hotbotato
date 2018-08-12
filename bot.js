@@ -9,6 +9,10 @@ const bot = () => {
   const client = new Discord.Client();
   client.commands = new Discord.Collection();
 
+  //GLOABAL VARIABLES
+  var potatoHolder;
+  var startedGame;
+
   const commandFiles = fs.readdirSync('./commands').filter((file) => {    
     return file.endsWith('.js');
   });  
