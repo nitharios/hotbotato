@@ -3,7 +3,8 @@ const fs = require('fs');
 
 const commandNames = {
   IGNITE: 'ignite',
-  PASS: 'pass'
+  PASS: 'pass',
+  HELP: 'help',
 }
 
 const {
@@ -12,7 +13,7 @@ const {
 } = require('./config.json');
 
 const bot = () => {
-  const { IGNITE, PASS } = commandNames;
+  const { IGNITE, PASS, HELP } = commandNames;
   const client = new Discord.Client();
   client.commands = new Discord.Collection();
 
@@ -42,8 +43,7 @@ const bot = () => {
         return reply.send(`You didn't provide any arguments, ${ message.author }`);
       
       } else {        
-        return command.execute(message, args);
-      
+        return command.execute(message, args);  
       }
 
     } else {

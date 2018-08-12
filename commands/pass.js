@@ -1,6 +1,6 @@
 module.exports = {
   name: 'pass',
-  description: 'pass to the next user',
+  description: 'If you are holding the botato, passes the botato to a user in the same channel.',
   args: true,
   execute(message, args) {
     const reply = message.channel;    
