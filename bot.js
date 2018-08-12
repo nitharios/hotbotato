@@ -10,10 +10,8 @@ const bot = () => {
   client.commands = new Discord.Collection();
 
   let timerTicking = false;
-
-  //GLOABAL VARIABLES
   let potatoHolder;
-  let startedGame;
+  let deathTracker = {};
 
   const commandFiles = fs.readdirSync('./commands').filter((file) => {    
     return file.endsWith('.js');
@@ -34,6 +32,7 @@ const bot = () => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName);
+    
     const reply = message.channel;
 
     if (client.commands.get(commandName)) {
@@ -65,6 +64,10 @@ const bot = () => {
     setTimeout(() => {
       timerTicking = false;
       channel.send(`BOOM!!! ${potatoHolder} exploded into smithereens!`);
+
+      const command = client.commands.get('deaths');
+      deathTracker = command.execute(channel, potatoHolder, deathTracker);
+      
     }, clock * 1000);
   }
 
