@@ -26,7 +26,14 @@ module.exports = {
     //   return holder;
 
     } else {
-      reply.send(`${message.author} passes to ${target}`);
+        reply.send(`${message.author} passes to ${target}`);
+        var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "http://api.giphy.com/v1/gifs/search?q=nfl%20pass&api_key=RZVJZWX9duzqE8SGkqMVf1EZgndURlxA&limit=1", false); // false for synchronous request
+        xmlHttp.send(null);
+        var response = JSON.parse(xmlHttp.responseText);
+        console.log(response.data[0].url);
+        reply.send(response.data[0].url);
       return target.user;
     }
   }

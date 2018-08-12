@@ -64,7 +64,14 @@ const bot = () => {
 
     setTimeout(() => {
       timerTicking = false;
-      channel.send(`BOOM!!! ${potatoHolder} exploded into smithereens!`);
+        channel.send(`BOOM!!! ${potatoHolder} exploded into smithereens!`);
+        var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "http://api.giphy.com/v1/gifs/search?q=konosuba%20explosion&api_key=RZVJZWX9duzqE8SGkqMVf1EZgndURlxA&limit=1", false); // false for synchronous request
+        xmlHttp.send(null);
+        var response = JSON.parse(xmlHttp.responseText);
+        console.log(response.data[0].url);
+        return channel.send(response.data[0].url);
     }, clock * 1000);
   }
 
