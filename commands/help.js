@@ -4,8 +4,7 @@ module.exports = {
   args: false,
   execute(message, args) {
 
-    message.channel.send(`\`\`\`Hot Botato is a twist on the original Hot Potato game. A random timer will be set and you have to pass the botato (bot) around unti
-it explodes! If the botato explodes while you're holding it, YOU GO BOOM!!! Pass it on quick!
+    message.channel.send(`\`\`\`Hot Botato is a twist on the original Hot Potato game. A random timer will be set and you have to pass the botato (bot) around until it explodes! If the botato explodes while you're holding it, YOU GO BOOM!!! Pass it on quick!
 
 List of commands:
 
