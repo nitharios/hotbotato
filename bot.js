@@ -30,7 +30,7 @@ const bot = () => {
 
   client.on('message', (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
-
+    
     const args = message.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName);
@@ -42,10 +42,14 @@ const bot = () => {
     
       } else if (commandName === 'ignite' && !timerTicking) {
         botatoTimer(message.channel);
-        setPotatoHolder(message.author);
-        return command.execute(message, args);
+        potatoHolder = command.execute(message, args);
+        return;
         
-      } else if (commandName !== 'ignite') {
+      } else if (commandName === 'pass' && message.author.username.username === potatoHolder) {
+        potatoHolder = command.execute(message, args, potatoHolder);
+        return;
+
+      } else {
         return command.execute(message, args);
       }
 
@@ -60,12 +64,8 @@ const bot = () => {
 
     setTimeout(() => {
       timerTicking = false;
-      channel.send('BOOM!!!');
+      channel.send(`BOOM!!! ${potatoHolder} exploded into smithereens!`);
     }, clock * 1000);
-  }
-
-  setTarget = (user) => {
-    potatoHolder = user;
   }
 
   return {
