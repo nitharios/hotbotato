@@ -9,6 +9,8 @@ const bot = () => {
   const client = new Discord.Client();
   client.commands = new Discord.Collection();
 
+  let timerTicking = false;
+
   //GLOABAL VARIABLES
   var potatoHolder;
   var startedGame;
@@ -37,15 +39,29 @@ const bot = () => {
     if (client.commands.get(commandName)) {
       if (command.args && !args.length) {
         return reply.send(`You didn't provide any arguments, ${ message.author }`);
-      
-      } else {        
-        return command.execute(message, args);  
+    
+      } else if (commandName === 'ignite' && !timerTicking) {
+        botatoTimer(message.channel);
+        return command.execute(message, args);
+        
+      } else if (commandName !== 'ignite') {
+        return command.execute(message, args);
       }
 
     } else {
       return reply.send(`That is not a valid command, ${ message.author }!`);
     }
   })
+
+  botatoTimer = (channel) => {
+    const clock = Math.floor(Math.random() * 10 + 5);
+    timerTicking = true;
+
+    setTimeout(() => {
+      timerTicking = false;
+      channel.send('BOOM!!!');
+    }, clock * 1000);
+  }
 
   return {
     client: client
