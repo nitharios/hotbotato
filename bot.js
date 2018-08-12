@@ -63,12 +63,23 @@ const bot = () => {
 
     setTimeout(() => {
       timerTicking = false;
-      channel.send(`BOOM!!! ${potatoHolder} exploded into smithereens!`);
+      // channel.send(`BOOM!!! ${potatoHolder} exploded into smithereens!`)
+      channel.send(generateMessage(5));
 
       const command = client.commands.get('deaths');
       deathTracker = command.execute(channel, potatoHolder, deathTracker);
       
     }, clock * 1000);
+  }
+
+  generateMessage = (num) => {
+    let str = `BOOM!!! ${potatoHolder} exploded into smithereens!\r\n`;
+
+    for (let i = 0; i < num; i++) {
+      str += str;
+    }
+
+    return str;
   }
 
   return {
