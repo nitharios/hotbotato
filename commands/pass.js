@@ -26,8 +26,8 @@ module.exports = {
     //   return holder;
 
     } else {
-      reply.send(`${ message.author } passes to ${ target }`);
-      return target;
+      reply.send(`${message.author} passes to ${target}`);
+      return target.user;
     }
   }
 }

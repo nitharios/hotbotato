@@ -3,7 +3,8 @@ module.exports = {
   description: 'Ignites the botato!',
   args: false,
   execute(message, args) {
-    message.channel.send(`${message.author} has started Hot Botato! Catch me!`);
+    const reply = message.channel;
+    reply.send(`${message.author} has started Hot Botato! Catch me!`);
     return message.author;
   }
 }

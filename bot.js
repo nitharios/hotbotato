@@ -43,11 +43,12 @@ const bot = () => {
       } else if (commandName === 'ignite' && !timerTicking) {
         botatoTimer(message.channel);
         potatoHolder = command.execute(message, args);
-        return;
+        return potatoHolder;
         
       } else if (commandName === 'pass' && message.author.username.username === potatoHolder) {
         potatoHolder = command.execute(message, args, potatoHolder);
-        return;
+        console.log(potatoHolder);
+        return potatoHolder;
 
       } else {
         return command.execute(message, args);
