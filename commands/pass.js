@@ -8,14 +8,20 @@ module.exports = {
       return member.user.username === args[0];
     });
 
+    console.log(target.presence);    
+    
+
     if (!target) {
-      return reply.send(`Oh no, ${ message.author }! That person doesn't exist :(`);
+      return reply.send(`Oh no, ${message.author}! That person doesn't exist :(`);
     
     } else if (target.user.username === message.author.username) {
-      return reply.send(`You can't pass to yourself, ${ message.author }!`);
+      return reply.send(`You can't pass to yourself, ${message.author}!`);
 
     } else if (target.bot) {
-      return reply.send(`You can't pass to a bot, ${ message.author }!`);
+      return reply.send(`You can't pass to a bot, ${message.author}!`);
+
+    } else if (target.presence.status === 'offline') {
+      return reply.send(`That person isn't online ${message.author}`);
 
     } else {
       return reply.send(`${ message.author } passes to ${ target }`);
