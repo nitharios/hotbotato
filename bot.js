@@ -45,12 +45,11 @@ const bot = () => {
         potatoHolder = command.execute(message, args);
         return potatoHolder;
         
-      } else if (commandName === 'pass' && message.author.username.username === potatoHolder) {
-        potatoHolder = command.execute(message, args, potatoHolder);
-        console.log(potatoHolder);
+      } else if (commandName === 'pass' && message.author.username === potatoHolder.username) {
+        potatoHolder = command.execute(message, args, potatoHolder);        
         return potatoHolder;
 
-      } else {
+      } else if (commandName !== 'ignite' && commandName !== 'pass') {
         return command.execute(message, args);
       }
 
