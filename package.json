@@ -18,6 +18,7 @@
   "homepage": "https://github.com/nitharios/hotbotato#readme",
   "dependencies": {
     "discord.js": "^11.4.0",
-    "npm": "^6.3.0"
+    "npm": "^6.3.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
