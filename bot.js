@@ -1,19 +1,11 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-
-const commandNames = {
-  IGNITE: 'ignite',
-  PASS: 'pass',
-  HELP: 'help',
-}
-
 const {
   prefix,
   token
 } = require('./config.json');
 
 const bot = () => {
-  const { IGNITE, PASS, HELP } = commandNames;
   const client = new Discord.Client();
   client.commands = new Discord.Collection();
 
